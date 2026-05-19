@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RAFT Consulting — Enterprise AI Transformation</title>
+  <meta name="description" content="RAFT Consulting replaces SAP, Oracle, and legacy systems with AI-native solutions — deployed in 3 to 8 weeks, with up to 80% TCO reduction." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="content.js"></script>
+
+  <style>
+    /* ── Brand Tokens ── */
+    :root {
+      --white:      #FFFFFF; --off-white:  #F7F7F5; --light-grey: #EBEBEB;
+      --mid-grey:   #C4C4C4; --steel-grey: #8A8A8A; --dark-grey:  #3D3D3D;
+      --charcoal:   #2B2B2B; --near-black: #1A1A1A; --logo-black: #2F3033;
+      --blue-light: #D6E8F7; --blue-soft:  #A8CCE8; --blue-mid:   #4A90C4;
+      --blue-core:  #1B6CA8; --blue-deep:  #0D4A7A; --blue-navy:  #062A4E;
+      --font: 'Inter','Helvetica Neue',Helvetica,Arial,sans-serif;
+      --ease: cubic-bezier(0.16,1,0.3,1);
+      --fast: 150ms var(--ease); --base: 250ms var(--ease); --slow: 400ms var(--ease);
+      --max: 1100px;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font);font-size:16px;line-height:1.6;color:var(--dark-grey);background:var(--white);-webkit-font-smoothing:antialiased;}
+    img{display:block;max-width:100%;height:auto;}
+    a{color:inherit;text-decoration:none;}
+    ul{list-style:none;}
+
+    /* ── Layout ── */
+    .container{max-width:var(--max);margin:0 auto;padding:0 40px;}
+    .section{padding:96px 0;}
+    .section--alt{background:var(--off-white);}
+    .section--dark{background:var(--charcoal);color:var(--white);}
+    .section--navy{background:var(--blue-navy);color:var(--white);}
+
+    /* ── Reveal ── */
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity var(--slow),transform var(--slow);}
+    .reveal.visible{opacity:1;transform:none;}
+    .d1{transition-delay:80ms;} .d2{transition-delay:160ms;} .d3{transition-delay:240ms;} .d4{transition-delay:320ms;}
+
+    /* ── Typography ── */
+    .eyebrow{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--blue-core);}
+    .section-title{font-size:clamp(26px,4vw,40px);font-weight:600;color:var(--near-black);margin-top:12px;line-height:1.2;}
+    .section--dark .section-title,.section--navy .section-title{color:var(--white);}
+    .section-lead{font-size:18px;font-weight:300;color:var(--steel-grey);margin-top:16px;max-width:600px;}
+    .section--dark .section-lead,.section--navy .section-lead{color:var(--blue-soft);}
+
+    /* ── Buttons ── */
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;font-family:var(--font);font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;border:none;cursor:pointer;transition:background var(--base),color var(--base),transform var(--base);}
+    .btn:hover{transform:translateY(-1px);}
+    .btn-primary{background:var(--blue-core);color:var(--white);}
+    .btn-primary:hover{background:var(--blue-deep);}
+    .btn-outline{background:transparent;color:var(--near-black);border:1.5px solid var(--near-black);}
+    .btn-outline:hover{background:var(--near-black);color:var(--white);}
+    .btn-outline-white{background:transparent;color:var(--white);border:1.5px solid rgba(255,255,255,.5);}
+    .btn-outline-white:hover{background:var(--white);color:var(--near-black);}
+
+    /* ── NAV ── */
+    #nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--light-grey);transition:box-shadow var(--base);}
+    #nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08);}
+    .nav-inner{max-width:var(--max);margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;}
+    .nav-logo{display:flex;align-items:center;gap:10px;}
+    .nav-wordmark{font-family:'Times New Roman',Times,serif;font-weight:700;font-size:22px;letter-spacing:.06em;color:var(--logo-black);display:flex;align-items:baseline;gap:7px;}
+    .nav-wordmark-consulting{font-size:15px;letter-spacing:.04em;font-weight:700;}
+    .nav-sub{font-size:11px;color:var(--steel-grey);}
+    .nav-logo-img{height:36px;width:auto;}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-link{font-size:13px;font-weight:500;color:var(--dark-grey);transition:color var(--base);}
+    .nav-link:hover{color:var(--blue-core);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+    .hamburger span{display:block;width:24px;height:2px;background:var(--near-black);}
+
+    /* ── Mobile Menu ── */
+    #mobileMenu{display:none;position:fixed;inset:0;background:var(--white);z-index:99;padding:88px 40px 40px;flex-direction:column;gap:24px;}
+    #mobileMenu.open{display:flex;}
+    .mob-link{font-size:22px;font-weight:500;color:var(--near-black);border-bottom:1px solid var(--light-grey);padding-bottom:20px;}
+
+    /* ── HERO ── */
+    .hero{min-height:100vh;background:var(--near-black);display:flex;flex-direction:column;justify-content:center;padding-top:68px;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(27,108,168,.18) 0%,transparent 70%);pointer-events:none;}
+    .hero::after{content:'';position:absolute;bottom:-100px;left:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(27,108,168,.10) 0%,transparent 70%);pointer-events:none;}
+    .hero-inner{max-width:var(--max);margin:0 auto;padding:80px 40px;position:relative;z-index:1;}
+    .hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--blue-mid);margin-bottom:24px;}
+    .hero-title{font-size:clamp(38px,6vw,72px);font-weight:700;color:var(--white);line-height:1.08;max-width:760px;letter-spacing:-.02em;}
+    .hero-title em{font-style:normal;color:var(--blue-mid);}
+    .hero-lead{font-size:clamp(17px,2vw,20px);font-weight:300;color:var(--blue-soft);margin-top:28px;max-width:600px;line-height:1.6;}
+    .hero-actions{display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;}
+    .hero-logo{margin-top:56px;height:44px;width:auto;opacity:.85;filter:brightness(0) invert(1);}
+
+    /* ── STATS BAR ── */
+    .statsbar{background:var(--blue-core);}
+    .statsbar-inner{max-width:var(--max);margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(4,1fr);}
+    .stat-item{padding:32px 24px;text-align:center;border-right:1px solid rgba(255,255,255,.15);}
+    .stat-item:last-child{border-right:none;}
+    .stat-num{font-size:36px;font-weight:700;color:var(--white);line-height:1;}
+    .stat-label{font-size:12px;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.05em;margin-top:6px;}
+
+    /* ── ABOUT ── */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--light-grey);border:1px solid var(--light-grey);margin-top:40px;}
+    .pillar{background:var(--white);padding:24px 20px;}
+    .pillar-letter{font-size:30px;font-weight:700;color:var(--blue-core);font-family:'Times New Roman',serif;line-height:1;}
+    .pillar-word{font-size:12px;font-weight:600;color:var(--near-black);letter-spacing:.05em;text-transform:uppercase;margin-top:4px;}
+    .pillar-desc{font-size:12px;color:var(--steel-grey);margin-top:4px;line-height:1.5;}
+    .about-visual{position:relative;display:flex;flex-direction:column;gap:0;}
+    .about-img{width:100%;display:block;}
+    .about-glyph{width:40px;height:40px;object-fit:contain;margin-bottom:16px;}
+    .about-infographic{width:100%;margin-top:0;}
+    /* Lightbulb strip — dark background, icon centred and slightly zoomed */
+    .about-lightbulb-wrap{background:var(--near-black);width:100%;height:180px;overflow:hidden;margin-top:0;display:flex;align-items:center;justify-content:center;}
+    .about-lightbulb-img{height:100%;width:100%;object-fit:contain;object-position:center;}
+    .body-text{font-size:16px;color:var(--dark-grey);line-height:1.75;margin-top:16px;}
+
+    /* ── SERVICES ── */
+    .services-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+    .svc-card{background:var(--white);border:1px solid var(--light-grey);padding:36px 32px;transition:border-color var(--base),box-shadow var(--base),transform var(--base);}
+    .svc-card:hover{border-color:var(--blue-core);box-shadow:0 8px 40px rgba(27,108,168,.12);transform:translateY(-2px);}
+    .svc-accent{width:36px;height:3px;background:var(--blue-core);margin-bottom:20px;}
+    .svc-title{font-size:20px;font-weight:600;color:var(--near-black);margin-top:10px;line-height:1.3;}
+    .svc-desc{font-size:14px;color:var(--steel-grey);margin-top:10px;line-height:1.7;}
+    .svc-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px;}
+    .svc-tag{font-size:11px;font-weight:500;color:var(--blue-deep);background:var(--blue-light);padding:4px 10px;}
+
+    /* ── PROMISES ── */
+    .promises-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+    .promise{padding:40px 28px;border-right:1px solid rgba(255,255,255,.08);transition:background var(--base);}
+    .promise:last-child{border-right:none;}
+    .promise:hover{background:rgba(255,255,255,.04);}
+    .promise-icon{font-size:28px;margin-bottom:16px;}
+    .promise-stat{font-size:38px;font-weight:700;color:var(--blue-soft);line-height:1;}
+    .promise-title{font-size:14px;font-weight:600;color:var(--white);margin-top:8px;}
+    .promise-desc{font-size:13px;color:rgba(255,255,255,.5);margin-top:8px;line-height:1.6;}
+
+    /* ── DATASHEETS ── */
+    .ds-tabs{display:flex;gap:0;border-bottom:1px solid var(--light-grey);margin-bottom:40px;flex-wrap:wrap;}
+    .ds-tab{padding:12px 24px;font-size:13px;font-weight:600;color:var(--steel-grey);cursor:pointer;border-bottom:2px solid transparent;transition:color var(--base),border-color var(--base);}
+    .ds-tab.active{color:var(--blue-core);border-bottom-color:var(--blue-core);}
+    .ds-tab:hover{color:var(--near-black);}
+    .ds-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    .ds-panel{display:none;}
+    .ds-panel.active{display:block;}
+    .ds-card{background:var(--white);border:1px solid var(--light-grey);padding:28px 24px;cursor:pointer;transition:border-color var(--base),box-shadow var(--base),transform var(--base);position:relative;}
+    .ds-card:hover{border-color:var(--blue-core);box-shadow:0 4px 24px rgba(27,108,168,.12);transform:translateY(-2px);}
+    .ds-id{font-size:10px;font-weight:600;letter-spacing:.1em;color:var(--mid-grey);text-transform:uppercase;}
+    .ds-title{font-size:15px;font-weight:600;color:var(--near-black);margin-top:8px;line-height:1.3;}
+    .ds-desc{font-size:13px;color:var(--steel-grey);margin-top:8px;line-height:1.6;}
+    .ds-meta{display:flex;gap:16px;margin-top:16px;}
+    .ds-badge{font-size:11px;font-weight:600;padding:3px 8px;}
+    .ds-badge-deploy{background:var(--blue-light);color:var(--blue-deep);}
+    .ds-badge-fit{background:#e8f5e9;color:#1b5e20;}
+    .ds-open{position:absolute;bottom:20px;right:20px;font-size:11px;font-weight:600;color:var(--blue-core);letter-spacing:.04em;display:flex;align-items:center;gap:4px;}
+    .ds-open::after{content:'→';}
+
+    /* ── MODAL ── */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center;padding:40px;}
+    .modal-overlay.open{display:flex;}
+    .modal-box{background:var(--white);max-width:900px;width:100%;max-height:90vh;overflow-y:auto;position:relative;}
+    .modal-close{position:absolute;top:16px;right:16px;font-size:24px;cursor:pointer;color:var(--steel-grey);z-index:1;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:var(--off-white);}
+    .modal-close:hover{color:var(--near-black);}
+    .modal-img{width:100%;display:block;}
+    .modal-info{padding:24px 28px;}
+    .modal-id{font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--blue-core);text-transform:uppercase;}
+    .modal-title{font-size:22px;font-weight:600;color:var(--near-black);margin-top:6px;}
+    .modal-desc{font-size:14px;color:var(--dark-grey);margin-top:10px;line-height:1.7;}
+    .modal-badges{display:flex;gap:12px;margin-top:16px;}
+
+    /* ── APPROACH ── */
+    .approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+    .approach-step{display:flex;gap:20px;padding:22px 0;border-bottom:1px solid var(--light-grey);}
+    .approach-step:first-child{border-top:1px solid var(--light-grey);}
+    .step-num{font-size:11px;font-weight:600;color:var(--blue-core);letter-spacing:.08em;min-width:28px;padding-top:2px;}
+    .step-title{font-size:14px;font-weight:600;color:var(--near-black);}
+    .step-desc{font-size:13px;color:var(--steel-grey);margin-top:4px;line-height:1.6;}
+    .approach-callout{background:var(--off-white);border-left:3px solid var(--blue-core);padding:18px 22px;margin-top:28px;font-size:14px;color:var(--dark-grey);line-height:1.7;}
+
+    /* ── INDUSTRIES ── */
+    .ind-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--light-grey);border:1px solid var(--light-grey);}
+    .ind-card{background:var(--white);cursor:pointer;transition:background var(--base);}
+    .ind-card:hover{background:var(--blue-light);}
+    .ind-card.expanded{background:var(--blue-core);}
+    .ind-top{padding:28px 20px;text-align:center;}
+    .ind-icon{font-size:28px;margin-bottom:10px;}
+    .ind-name{font-size:12px;font-weight:600;color:var(--near-black);letter-spacing:.04em;}
+    .ind-card.expanded .ind-name{color:var(--white);}
+    .ind-expand{display:none;padding:0 16px 20px;border-top:1px solid rgba(255,255,255,.2);}
+    .ind-card.expanded .ind-expand{display:block;}
+    .ind-highlight{font-size:12px;color:rgba(255,255,255,.85);padding:5px 0;display:flex;gap:6px;align-items:flex-start;border-bottom:1px solid rgba(255,255,255,.1);}
+    .ind-highlight:last-child{border-bottom:none;}
+    .ind-highlight::before{content:'→';color:rgba(255,255,255,.5);flex-shrink:0;}
+
+    /* ── APPROACH BLOGS ── */
+    .approach-blogs{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px;padding-top:48px;border-top:1px solid var(--light-grey);}
+    .approach-blog-card{background:var(--off-white);border:1px solid var(--light-grey);padding:24px 20px;transition:border-color var(--base),box-shadow var(--base),transform var(--base);cursor:pointer;}
+    .approach-blog-card:hover{border-color:var(--blue-core);box-shadow:0 4px 20px rgba(27,108,168,.1);transform:translateY(-2px);}
+    .approach-blog-cat{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-core);margin-bottom:10px;}
+    .approach-blog-title{font-size:14px;font-weight:600;color:var(--near-black);line-height:1.4;}
+    .approach-blog-link{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:var(--blue-core);text-transform:uppercase;letter-spacing:.04em;margin-top:14px;}
+
+    /* ── PARTNERS ── */
+    .partners-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    .partner-card{background:var(--white);border:1px solid var(--light-grey);padding:28px 24px;transition:border-color var(--base),box-shadow var(--base);}
+    .partner-card:hover{border-color:var(--blue-soft);box-shadow:0 4px 20px rgba(27,108,168,.08);}
+    .partner-card.dark{background:var(--blue-navy);border-color:var(--blue-deep);}
+    .partner-img{height:36px;width:auto;margin-bottom:16px;object-fit:contain;}
+    .partner-name{font-size:17px;font-weight:700;color:var(--near-black);}
+    .partner-card.dark .partner-name{color:var(--white);}
+    .partner-role{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue-core);margin-top:4px;}
+    .partner-card.dark .partner-role{color:var(--blue-soft);}
+    .partner-desc{font-size:13px;color:var(--steel-grey);margin-top:12px;line-height:1.65;}
+    .partner-card.dark .partner-desc{color:rgba(255,255,255,.5);}
+    .partner-meta{font-size:11px;color:var(--mid-grey);margin-top:14px;font-weight:500;}
+    .partner-card.dark .partner-meta{color:rgba(255,255,255,.25);}
+
+    /* ── INSIGHTS ── */
+    .insights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+    .insight-card{background:var(--white);border:1px solid var(--light-grey);padding:32px 28px;position:relative;transition:border-color var(--base),box-shadow var(--base);}
+    .insight-card:hover{border-color:var(--blue-soft);box-shadow:0 4px 20px rgba(27,108,168,.08);}
+    .insight-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;}
+    .insight-cat{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-core);}
+    .insight-badge{font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;background:var(--blue-light);color:var(--blue-deep);padding:4px 10px;white-space:nowrap;}
+    .insight-title{font-size:17px;font-weight:600;color:var(--near-black);line-height:1.35;}
+    .insight-excerpt{font-size:13px;color:var(--steel-grey);margin-top:10px;line-height:1.65;}
+    .insight-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--blue-core);letter-spacing:.04em;text-transform:uppercase;margin-top:20px;transition:gap var(--base);}
+    .insight-link:hover{gap:10px;}
+
+    /* ── CONTACT ── */
+    .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;}
+    .contact-info-item{margin-top:28px;}
+    .contact-label{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue-core);margin-bottom:4px;}
+    .contact-value{font-size:15px;color:var(--near-black);font-weight:500;}
+    .contact-form{display:flex;flex-direction:column;gap:16px;}
+    .field{display:flex;flex-direction:column;gap:5px;}
+    .field label{font-size:11px;font-weight:600;color:var(--dark-grey);letter-spacing:.06em;text-transform:uppercase;}
+    .field input,.field select,.field textarea{font-family:var(--font);font-size:14px;color:var(--near-black);background:var(--white);border:1px solid var(--light-grey);padding:11px 14px;outline:none;transition:border-color var(--base);width:100%;}
+    .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--blue-core);}
+    .field textarea{resize:vertical;min-height:110px;}
+
+    /* ── FOOTER ── */
+    footer{background:var(--logo-black);color:var(--mid-grey);padding:56px 0 32px;}
+    .footer-inner{max-width:var(--max);margin:0 auto;padding:0 40px;}
+    .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.08);}
+    .footer-logo{font-family:'Times New Roman',serif;font-weight:700;font-size:24px;letter-spacing:.06em;color:var(--white);}
+    .footer-tagline{font-size:13px;color:rgba(255,255,255,.35);margin-top:8px;line-height:1.6;max-width:240px;}
+    .footer-col-title{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:14px;}
+    .footer-links{display:flex;flex-direction:column;gap:10px;}
+    .footer-link{font-size:13px;color:rgba(255,255,255,.4);transition:color var(--base);}
+    .footer-link:hover{color:var(--white);}
+    .footer-bottom{padding-top:28px;display:flex;justify-content:space-between;font-size:12px;color:rgba(255,255,255,.25);}
+
+    /* ── Responsive ── */
+    @media(max-width:900px){
+      .container{padding:0 24px;}
+      .nav-inner{padding:0 24px;}
+      .nav-links{display:none;}
+      .hamburger{display:flex;}
+      .hero-inner{padding:60px 24px;}
+      .statsbar-inner{grid-template-columns:repeat(2,1fr);padding:0 24px;}
+      .stat-item:nth-child(2){border-right:none;}
+      .about-grid,.approach-grid,.contact-grid{grid-template-columns:1fr;gap:48px;}
+      .hero-inner>div[style*='grid']{grid-template-columns:1fr!important;}
+      .about-lightbulb-wrap{height:120px;}
+      .services-grid,.insights-grid{grid-template-columns:1fr;}
+      .promises-grid{grid-template-columns:1fr 1fr;}
+      .promise:nth-child(2){border-right:none;}
+      .partners-grid{grid-template-columns:1fr 1fr;}
+      .ind-grid{grid-template-columns:repeat(3,1fr);}
+      .ds-grid{grid-template-columns:repeat(2,1fr);}
+      .footer-top{grid-template-columns:1fr 1fr;gap:32px;}
+      .footer-inner{padding:0 24px;}
+      .section{padding:72px 0;}
+    }
+    @media(max-width:540px){
+      .promises-grid{grid-template-columns:1fr;}
+      .ind-grid{grid-template-columns:repeat(2,1fr);}
+      .partners-grid{grid-template-columns:1fr;}
+      .ds-grid{grid-template-columns:1fr;}
+      .footer-top{grid-template-columns:1fr;}
+      .about-pillars{grid-template-columns:1fr;}
+      .statsbar-inner{grid-template-columns:1fr 1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" id="navLogo">
+      <!-- populated by JS -->
+    </a>
+    <ul class="nav-links" id="navLinks"></ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobileMenu">
+  <a href="#about"       class="mob-link">About</a>
+  <a href="#services"    class="mob-link">Services</a>
+  <a href="#datasheets"  class="mob-link">Solutions</a>
+  <a href="#approach"    class="mob-link">Approach</a>
+  <a href="#industries"  class="mob-link">Industries</a>
+  <a href="#partners"    class="mob-link">Partners</a>
+  <a href="#insights"    class="mob-link">Insights</a>
+  <a href="#contact"     class="mob-link">Contact</a>
+  <a href="#contact" class="btn btn-primary" style="align-self:flex-start;margin-top:8px;">Contact Us</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-inner" id="heroInner"></div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="statsbar"><div class="statsbar-inner" id="statsBar"></div></div>
+
+<!-- ── ABOUT ── -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid" id="aboutGrid"></div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="section section--alt" id="services">
+  <div class="container">
+    <div style="margin-bottom:56px;">
+      <p class="eyebrow reveal">Service Portfolio</p>
+      <h2 class="section-title reveal">AI Solutions Across the Enterprise</h2>
+      <p class="section-lead reveal">RAFT designs the strategy. Our partners engineer the solution. Your supply chain transforms in weeks, not quarters.</p>
+    </div>
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ── DELIVERY PROMISES ── -->
+<section class="section section--dark">
+  <div class="container">
+    <div style="margin-bottom:48px;">
+      <p class="eyebrow reveal" style="color:var(--blue-mid);">RAFT Guaranteed Goals</p>
+      <h2 class="section-title reveal">What We Deliver in Every Engagement</h2>
+      <p class="section-lead reveal">We assert, don't hedge. Every RAFT engagement is structured to hit these goalposts.</p>
+    </div>
+    <div class="promises-grid reveal" id="promisesGrid"></div>
+  </div>
+</section>
+
+<!-- ── DATASHEETS ── -->
+<section class="section section--alt" id="datasheets">
+  <div class="container">
+    <div style="margin-bottom:48px;">
+      <p class="eyebrow reveal">Agentic AI Use Cases</p>
+      <h2 class="section-title reveal">Pre-Built, Configurable &amp; Deployable in Weeks</h2>
+      <p class="section-lead reveal">Click any solution to view the full infographic and capability datasheet.</p>
+    </div>
+    <div class="ds-tabs reveal" id="dsTabs"></div>
+    <div id="dsPanels"></div>
+  </div>
+</section>
+
+<!-- ── APPROACH ── -->
+<section class="section" id="approach">
+  <div class="container">
+    <div class="approach-grid" id="approachGrid"></div>
+    <div id="approachBlogs" style="display:none;"></div>
+  </div>
+</section>
+
+<!-- ── INDUSTRIES ── -->
+<section class="section section--alt" id="industries">
+  <div class="container">
+    <div style="text-align:center;max-width:600px;margin:0 auto 48px;">
+      <p class="eyebrow reveal" style="text-align:center;">Industries</p>
+      <h2 class="section-title reveal" style="text-align:center;">Built for Enterprise Verticals</h2>
+      <p class="section-lead reveal" style="text-align:center;margin:12px auto 0;">Click any industry to see RAFT's AI highlights for that sector.</p>
+    </div>
+    <div class="ind-grid reveal" id="industriesGrid"></div>
+  </div>
+</section>
+
+<!-- ── PARTNERS ── -->
+<section class="section" id="partners">
+  <div class="container">
+    <p class="eyebrow reveal">Partner Ecosystem</p>
+    <h2 class="section-title reveal">RAFT Designs. Partners Deliver.</h2>
+    <p class="section-lead reveal">A curated network of best-in-class technology and delivery partners — each tightly integrated with RAFT's advisory practice.</p>
+    <div class="partners-grid" style="margin-top:48px;" id="partnersGrid"></div>
+  </div>
+</section>
+
+<!-- ── INSIGHTS ── -->
+<section class="section section--alt" id="insights">
+  <div class="container">
+    <div style="margin-bottom:48px;">
+      <p class="eyebrow reveal">Insights</p>
+      <h2 class="section-title reveal">Intelligence for Enterprise Leaders</h2>
+      <p class="section-lead reveal">Practical thinking on AI transformation for supply chain, finance, and operations.</p>
+    </div>
+    <div class="insights-grid" id="insightsGrid"></div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="contact-grid" id="contactGrid"></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner" id="footerInner"></div>
+</footer>
+
+<!-- ── MODAL ── -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-close" id="modalClose">✕</div>
+    <img class="modal-img" id="modalImg" src="" alt="" />
+    <div class="modal-info">
+      <div class="modal-id" id="modalId"></div>
+      <div class="modal-title" id="modalTitle"></div>
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-badges" id="modalBadges"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ RENDER SCRIPT ═══════════════════ -->
+<script>
+const C = RAFT;
+
+// ── Helpers ──
+function el(tag, cls, html) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (html !== undefined) e.innerHTML = html;
+  return e;
+}
+function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
+
+// ── NAV ──
+(function(){
+  const logo = document.getElementById('navLogo');
+  logo.innerHTML = `
+    ${C.hero.logo_nav_glyph ? `<img src="${C.hero.logo_nav_glyph}" alt="RAFT" style="height:28px;width:auto;flex-shrink:0;" onerror="this.style.display='none';">` : ''}
+    <span class="nav-wordmark">RAFT<span class="nav-wordmark-consulting">Consulting</span></span>`;
+
+  const links = document.getElementById('navLinks');
+  [['About','#about'],['Services','#services'],['Solutions','#datasheets'],
+   ['Approach','#approach'],['Industries','#industries'],['Partners','#partners'],
+   ['Insights','#insights']].forEach(([t,h]) => {
+    const li = el('li'); const a = el('a','nav-link',t); a.href = h;
+    li.appendChild(a); links.appendChild(li);
+  });
+  const li2 = el('li');
+  const cta = el('a','btn btn-primary',`Contact Us`); cta.href='#contact';
+  li2.appendChild(cta); links.appendChild(li2);
+})();
+
+// ── HERO ──
+(function(){
+  const h = C.hero, co = C.company;
+  document.getElementById('heroInner').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
+      <div class="${rev()}">
+        ${h.logo_hero ? `<img src="${h.logo_hero}" alt="${co.name}" style="width:100%;max-width:380px;display:block;filter:brightness(0) invert(1);opacity:.92;" onerror="this.style.display='none';">` : ''}
+      </div>
+      <div>
+        <p class="hero-eyebrow ${rev()}">${h.eyebrow}</p>
+        <h1 class="hero-title ${rev()} d1">${h.line1}<br/><em>${h.line2}</em><br/>${h.line3}</h1>
+        <p class="hero-lead ${rev()} d2">${h.lead}</p>
+        <div class="hero-actions ${rev()} d3">
+          <a href="${h.cta1_link}" class="btn btn-primary">${h.cta1_text}</a>
+          <a href="${h.cta2_link}" class="btn btn-outline-white">${h.cta2_text}</a>
+        </div>
+      </div>
+    </div>`;
+})();
+
+// ── STATS ──
+(function(){
+  const bar = document.getElementById('statsBar');
+  C.stats.forEach((s,i) => {
+    bar.innerHTML += `<div class="stat-item ${rev()} ${['','d1','d2','d3'][i]}">
+      <div class="stat-num">${s.number}</div>
+      <div class="stat-label">${s.label}</div></div>`;
+  });
+})();
+
+// ── ABOUT ──
+(function(){
+  const a = C.about;
+  const pillarsHtml = a.pillars.map(p => `
+    <div class="pillar">
+      <div class="pillar-letter">${p.letter}</div>
+      <div class="pillar-word">${p.word}</div>
+      <div class="pillar-desc">${p.desc}</div>
+    </div>`).join('');
+
+  document.getElementById('aboutGrid').innerHTML = `
+    <div>
+      ${a.image_glyph ? `<img src="${a.image_glyph}" alt="RAFT Logo" class="about-glyph ${rev()}" onerror="this.style.display='none';">` : ''}
+      <p class="eyebrow ${rev()}">${a.eyebrow}</p>
+      <h2 class="section-title ${rev()} d1">${a.title}</h2>
+      <p class="body-text ${rev()} d2">${a.body1}</p>
+      <p class="body-text ${rev()} d2">${a.body2}</p>
+      <div class="about-pillars ${rev()} d3">${pillarsHtml}</div>
+    </div>
+    <div class="about-visual ${rev()} d1">
+      ${a.image ? `
+        <img src="${a.image}" alt="${a.image_alt}" class="about-infographic"
+             style="border:1px solid var(--light-grey);"
+             onerror="this.style.display='none';">` : ''}
+      ${a.image_lightbulb ? `
+        <div class="about-lightbulb-wrap ${rev()} d2">
+          <img src="${a.image_lightbulb}" alt="RAFT Innovation" class="about-lightbulb-img"
+               onerror="this.parentElement.style.display='none';">
+        </div>` : ''}
+    </div>`;
+})();
+
+// ── SERVICES ──
+(function(){
+  const grid = document.getElementById('servicesGrid');
+  C.services.forEach((s,i) => {
+    const tags = s.tags.map(t=>`<span class="svc-tag">${t}</span>`).join('');
+    const delays = ['','d1','d2','d3'];
+    grid.innerHTML += `
+      <div class="svc-card ${rev()} ${delays[i]}">
+        <div class="svc-accent"></div>
+        <p class="eyebrow">${s.eyebrow}</p>
+        <h3 class="svc-title">${s.title}</h3>
+        <p class="svc-desc">${s.desc}</p>
+        <div class="svc-tags">${tags}</div>
+      </div>`;
+  });
+})();
+
+// ── PROMISES ──
+(function(){
+  const grid = document.getElementById('promisesGrid');
+  C.promises.forEach(p => {
+    grid.innerHTML += `
+      <div class="promise">
+        <div class="promise-icon">${p.icon}</div>
+        <div class="promise-stat">${p.stat}</div>
+        <div class="promise-title">${p.title}</div>
+        <div class="promise-desc">${p.desc}</div>
+      </div>`;
+  });
+})();
+
+// ── DATASHEETS ──
+(function(){
+  // Group datasheets by group label
+  const groups = {};
+  C.datasheets.forEach(d => {
+    if (!groups[d.group]) groups[d.group] = [];
+    groups[d.group].push(d);
+  });
+  const groupNames = Object.keys(groups);
+
+  const tabsEl = document.getElementById('dsTabs');
+  const panelsEl = document.getElementById('dsPanels');
+
+  groupNames.forEach((gname, gi) => {
+    // Tab
+    const tab = el('div', 'ds-tab' + (gi===0?' active':''), gname);
+    tab.dataset.group = gi;
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.ds-tab').forEach(t=>t.classList.remove('active'));
+      document.querySelectorAll('.ds-panel').forEach(p=>p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('ds-panel-'+gi).classList.add('active');
+    });
+    tabsEl.appendChild(tab);
+
+    // Panel
+    const panel = el('div', 'ds-panel' + (gi===0?' active':''));
+    panel.id = 'ds-panel-'+gi;
+    const pgrid = el('div','ds-grid');
+    groups[gname].forEach(d => {
+      const card = el('div','ds-card');
+      card.innerHTML = `
+        <div class="ds-id">${d.id}</div>
+        <div class="ds-title">${d.title}</div>
+        <div class="ds-desc">${d.desc}</div>
+        <div class="ds-meta">
+          <span class="ds-badge ds-badge-deploy">⚡ ${d.deploy}</span>
+          <span class="ds-badge ds-badge-fit">✓ ${d.fit} fit</span>
+        </div>
+        <div class="ds-open">View Datasheet</div>`;
+      card.addEventListener('click', () => openModal(d));
+      pgrid.appendChild(card);
+    });
+    panel.appendChild(pgrid);
+    panelsEl.appendChild(panel);
+  });
+})();
+
+// ── MODAL ──
+function openModal(d) {
+  document.getElementById('modalImg').src = d.image;
+  document.getElementById('modalImg').alt = d.title;
+  document.getElementById('modalImg').onerror = function(){ this.style.display='none'; };
+  document.getElementById('modalId').textContent = d.id;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalDesc').textContent = d.desc;
+  document.getElementById('modalBadges').innerHTML = `
+    <span class="ds-badge ds-badge-deploy" style="padding:6px 12px;">⚡ Deploy in ${d.deploy}</span>
+    <span class="ds-badge ds-badge-fit" style="padding:6px 12px;">✓ ${d.fit} Business Fit</span>`;
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modal').addEventListener('click', e => { if(e.target===document.getElementById('modal')) closeModal(); });
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+// ── APPROACH ──
+(function(){
+  const a = C.approach;
+  const stepsHtml = a.steps.map(s=>`
+    <div class="approach-step">
+      <span class="step-num">${s.num}</span>
+      <div><div class="step-title">${s.title}</div>
+      <div class="step-desc">${s.desc}</div></div>
+    </div>`).join('');
+
+  document.getElementById('approachGrid').innerHTML = `
+    <div>
+      <p class="eyebrow ${rev()}">${a.eyebrow}</p>
+      <h2 class="section-title ${rev()} d1">${a.title}</h2>
+      <p class="section-lead ${rev()} d2">${a.lead}</p>
+      <div class="${rev()} d2">${stepsHtml}</div>
+      <div class="approach-callout ${rev()} d3">${a.callout}</div>
+    </div>
+    <div class="${rev()} d1">
+      <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--steel-grey);margin-bottom:20px;">Related Reading</p>
+      ${C.insights.filter(i=>!i.coming_soon).map(ins=>`
+        <a href="${ins.link}" target="_blank" class="approach-blog-card" style="display:block;margin-bottom:14px;text-decoration:none;">
+          <div class="approach-blog-cat">${ins.category}</div>
+          <div class="approach-blog-title">${ins.title}</div>
+          <div class="approach-blog-link">Read Article →</div>
+        </a>`).join('')}
+    </div>`;
+})();
+
+// ── APPROACH BLOGS ──
+(function(){
+  const blogsEl = document.getElementById('approachBlogs');
+  if (!blogsEl) return;
+  // Pull from insights (live blogs only)
+  const liveBlogs = C.insights.filter(i => !i.coming_soon);
+  if (!liveBlogs.length) return;
+  blogsEl.innerHTML = `<p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--steel-grey);margin-bottom:20px;">Related Reading</p>`;
+  const grid = document.createElement('div');
+  grid.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;';
+  liveBlogs.forEach(ins => {
+    const card = document.createElement('a');
+    card.href = ins.link;
+    card.target = '_blank';
+    card.className = 'approach-blog-card';
+    card.innerHTML = `
+      <div class="approach-blog-cat">${ins.category}</div>
+      <div class="approach-blog-title">${ins.title}</div>
+      <div class="approach-blog-link">Read Article →</div>`;
+    grid.appendChild(card);
+  });
+  blogsEl.appendChild(grid);
+})();
+
+// ── INDUSTRIES ──
+(function(){
+  const grid = document.getElementById('industriesGrid');
+  C.industries.forEach(ind => {
+    const card = el('div','ind-card');
+    const highlightsHtml = ind.highlights.map(h=>`<div class="ind-highlight">${h}</div>`).join('');
+    card.innerHTML = `
+      <div class="ind-top">
+        <div class="ind-icon">${ind.icon}</div>
+        <div class="ind-name">${ind.name}</div>
+      </div>
+      <div class="ind-expand">${highlightsHtml}</div>`;
+    card.addEventListener('click', () => {
+      const wasOpen = card.classList.contains('expanded');
+      document.querySelectorAll('.ind-card').forEach(c=>c.classList.remove('expanded'));
+      if (!wasOpen) card.classList.add('expanded');
+    });
+    grid.appendChild(card);
+  });
+})();
+
+// ── PARTNERS ──
+(function(){
+  const grid = document.getElementById('partnersGrid');
+  C.partners.forEach((p,i) => {
+    const delays = ['','d1','d2','','d1','d2'];
+    const card = el('div', `partner-card ${rev()} ${delays[i]}` + (p.dark?' dark':''));
+    card.innerHTML = `
+      ${p.image ? `<img src="${p.image}" alt="${p.name}" class="partner-img" onerror="this.style.display='none';">` : ''}
+      <div class="partner-name">${p.name}</div>
+      <div class="partner-role">${p.role}</div>
+      <p class="partner-desc">${p.desc}</p>
+      <div class="partner-meta">${p.meta}</div>`;
+    grid.appendChild(card);
+  });
+})();
+
+// ── INSIGHTS ──
+(function(){
+  const grid = document.getElementById('insightsGrid');
+  C.insights.forEach((ins,i) => {
+    const delays = ['','d1','','d1'];
+    grid.innerHTML += `
+      <div class="insight-card ${rev()} ${delays[i]}">
+        <div class="insight-top">
+          <span class="insight-cat">${ins.category}</span>
+          ${ins.coming_soon ? `<span class="insight-badge">Coming Soon</span>` : ''}
+        </div>
+        <div class="insight-title">${ins.title}</div>
+        <div class="insight-excerpt">${ins.excerpt}</div>
+        <a href="${ins.link}" class="insight-link" ${!ins.coming_soon ? 'target="_blank"' : ''}>${ins.coming_soon ? 'Notify Me' : 'Read Article →'}</a>
+      </div>`;
+  });
+})();
+
+// ── CONTACT ──
+(function(){
+  const co = C.company, ct = C.contact;
+  const interests = ct.interests.map(i=>`<option>${i}</option>`).join('');
+  const infoItems = [
+    ['Location', co.location],
+    ['Email',    `<a href="mailto:${co.email}" style="color:var(--blue-core);">${co.email}</a>`],
+    co.phone ? ['Phone', co.phone] : null,
+    ['Website',  co.website],
+    ['Market',   co.market],
+  ].filter(Boolean).map(([lbl,val])=>`
+    <div class="contact-info-item">
+      <div class="contact-label">${lbl}</div>
+      <div class="contact-value">${val}</div>
+    </div>`).join('');
+
+  document.getElementById('contactGrid').innerHTML = `
+    <div>
+      <p class="eyebrow ${rev()}">${ct.eyebrow}</p>
+      <h2 class="section-title ${rev()} d1">${ct.title}</h2>
+      <p class="section-lead ${rev()} d2">${ct.lead}</p>
+      ${infoItems}
+      ${ct.image ? `<img src="${ct.image}" style="max-width:200px;margin-top:32px;opacity:.65;" onerror="this.style.display='none';">` : ''}
+    </div>
+    <div class="${rev()} d1">
+      <form class="contact-form" onsubmit="submitForm(event)">
+        <div class="field"><label>Full Name</label><input type="text" placeholder="Your name" required></div>
+        <div class="field"><label>Company</label><input type="text" placeholder="Organisation name" required></div>
+        <div class="field"><label>Email</label><input type="email" placeholder="you@company.com" required></div>
+        <div class="field"><label>Area of Interest</label>
+          <select><option value="">Select a service area</option>${interests}</select></div>
+        <div class="field"><label>Message</label>
+          <textarea placeholder="Describe your challenge or what you'd like to explore…"></textarea></div>
+        <button type="submit" class="btn btn-primary" style="align-self:flex-start;margin-top:8px;">Send Message →</button>
+        <div id="formOk" style="display:none;font-size:13px;color:var(--blue-core);font-weight:500;margin-top:8px;">
+          ✓ Thank you — we'll be in touch shortly.
+        </div>
+      </form>
+    </div>`;
+})();
+
+function submitForm(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = 'Sending…'; btn.disabled = true;
+  setTimeout(()=>{ document.getElementById('formOk').style.display='block'; btn.textContent='Sent ✓'; }, 900);
+}
+
+// ── FOOTER ──
+(function(){
+  const co = C.company;
+  document.getElementById('footerInner').innerHTML = `
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">${co.name.split(' ')[0]}</div>
+        <p class="footer-tagline">${co.tagline}.<br>${co.market}.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Services</div>
+        <ul class="footer-links">
+          <li><a href="#services" class="footer-link">Supply Chain AI</a></li>
+          <li><a href="#services" class="footer-link">Finance AI</a></li>
+          <li><a href="#services" class="footer-link">AI Advisory</a></li>
+          <li><a href="#services" class="footer-link">Sovereign AI</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#about"      class="footer-link">About RAFT</a></li>
+          <li><a href="#partners"   class="footer-link">Partners</a></li>
+          <li><a href="#industries" class="footer-link">Industries</a></li>
+          <li><a href="#insights"   class="footer-link">Insights</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <ul class="footer-links">
+          <li><a href="mailto:${co.email}" class="footer-link">${co.email}</a></li>
+          <li><span class="footer-link">${co.location}</span></li>
+          <li><span class="footer-link">${co.website}</span></li>
+          ${co.linkedin ? `<li><a href="${co.linkedin}" class="footer-link">LinkedIn</a></li>` : ''}
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© ${co.copyright}</span>
+      <span>Redefining Enterprise Intelligence · ${co.market}</span>
+    </div>`;
+})();
+
+// ── Nav scroll ──
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', scrollY > 20);
+});
+
+// ── Hamburger ──
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+document.querySelectorAll('.mob-link, #mobileMenu .btn').forEach(l => {
+  l.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open'));
+});
+
+// ── Scroll reveal ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// Trigger above-fold reveals immediately
+setTimeout(() => {
+  document.querySelectorAll('.hero .reveal, .statsbar .reveal').forEach(el => el.classList.add('visible'));
+}, 80);
+
+// ── Smooth scroll ──
+document.addEventListener('click', e => {
+  const a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  const target = document.querySelector(a.getAttribute('href'));
+  if (target) { e.preventDefault(); target.scrollIntoView({ behavior:'smooth' }); }
+});
+</script>
+</body>
+</html>

@@ -468,7 +468,7 @@ function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
   document.getElementById('heroInner').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
       <div class="${rev()}">
-        ${h.logo_hero ? `<img src="${h.logo_hero}" alt="${co.name}" style="width:100%;max-width:380px;display:block;filter:brightness(0) invert(1);opacity:.92;" onerror="this.style.display='none';">` : ''}
+        ${h.logo_hero ? `<img src="${h.logo_hero}" alt="${co.name}" style="width:100%;max-width:400px;display:block;border-radius:4px;" onerror="this.style.display='none';">` : ''}
       </div>
       <div>
         <p class="hero-eyebrow ${rev()}">${h.eyebrow}</p>

@@ -31,12 +31,10 @@ const RAFT = {
     cta1_link:  "#services",
     cta2_text:  "Talk to RAFT",
     cta2_link:  "#contact",
-    // Logo shown large on LEFT side of hero (white version for dark background)
-    logo_hero:       "images/styleguide_slide1_0.jpg",
-    // Glyph shown in NAV to the left of "RAFT Consulting" wordmark
-    logo_nav_glyph:  "images/raft-logo-glyph.png",
-    // Nav wordmark fallback image (if glyph+text not used)
-    logo_nav:        "images/styleguide_slide2_3.png",
+    // White glyph PNG (white circles on black background)
+    // — used large in hero LEFT column, and inverted (CSS filter) for black nav glyph
+    // Save as: images/raft-logo-white.png
+    logo_white:      "images/raft-logo-white.png",
   },
 
   // ─── STATS BAR ─────────────────────────────────────────────────────────────

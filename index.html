@@ -447,8 +447,8 @@ function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
 (function(){
   const logo = document.getElementById('navLogo');
   logo.innerHTML = `
-    ${C.hero.logo_nav_glyph ? `<img src="${C.hero.logo_nav_glyph}" alt="RAFT" style="height:28px;width:auto;flex-shrink:0;" onerror="this.style.display='none';">` : ''}
-    <span class="nav-wordmark">RAFT<span class="nav-wordmark-consulting">Consulting</span></span>`;
+    <img src="${C.hero.logo_white}" alt="RAFT" style="height:30px;width:auto;flex-shrink:0;filter:invert(1);" onerror="this.style.display='none';">
+    <span class="nav-wordmark" style="font-size:22px;">RAFT</span>`;
 
   const links = document.getElementById('navLinks');
   [['About','#about'],['Services','#services'],['Solutions','#datasheets'],
@@ -467,8 +467,15 @@ function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
   const h = C.hero, co = C.company;
   document.getElementById('heroInner').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
-      <div class="${rev()}">
-        ${h.logo_hero ? `<img src="${h.logo_hero}" alt="${co.name}" style="width:100%;max-width:400px;display:block;border-radius:4px;" onerror="this.style.display='none';">` : ''}
+      <div class="${rev()}" style="display:flex;flex-direction:column;align-items:flex-start;">
+        <img src="${h.logo_white}" alt="${co.name}"
+             style="width:100%;max-width:340px;display:block;"
+             onerror="this.style.display='none';">
+        <div style="margin-top:28px;font-family:'Times New Roman',Times,serif;font-weight:700;
+                    color:var(--white);letter-spacing:.04em;line-height:1.1;">
+          <div style="font-size:clamp(32px,4vw,52px);">RAFT</div>
+          <div style="font-size:clamp(20px,2.5vw,32px);opacity:.85;">Consulting</div>
+        </div>
       </div>
       <div>
         <p class="hero-eyebrow ${rev()}">${h.eyebrow}</p>

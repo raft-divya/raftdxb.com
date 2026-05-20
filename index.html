@@ -64,8 +64,8 @@
     #nav.scrolled{box-shadow:0 2px 20px rgba(0,0,0,.08);}
     .nav-inner{max-width:var(--max);margin:0 auto;padding:0 40px;height:68px;display:flex;align-items:center;justify-content:space-between;}
     .nav-logo{display:flex;align-items:center;gap:10px;}
-    .nav-wordmark{font-family:'Times New Roman',Times,serif;font-weight:700;font-size:22px;letter-spacing:.06em;color:var(--logo-black);display:flex;align-items:baseline;gap:7px;}
-    .nav-wordmark-consulting{font-size:15px;letter-spacing:.04em;font-weight:700;}
+    .nav-wordmark{font-family:'Times New Roman',Times,serif;font-weight:700;font-size:28px;letter-spacing:.06em;color:var(--logo-black);display:flex;align-items:baseline;gap:7px;}
+    .nav-wordmark-consulting{font-size:18px;letter-spacing:.04em;font-weight:700;}
     .nav-sub{font-size:11px;color:var(--steel-grey);}
     .nav-logo-img{height:36px;width:auto;}
     .nav-links{display:flex;align-items:center;gap:28px;}
@@ -100,7 +100,7 @@
     .stat-label{font-size:12px;font-weight:500;color:rgba(255,255,255,.7);letter-spacing:.05em;margin-top:6px;}
 
     /* ── ABOUT ── */
-    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+    .about-grid{display:grid;grid-template-columns:2fr 3fr;gap:64px;align-items:start;}
     .about-pillars{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--light-grey);border:1px solid var(--light-grey);margin-top:40px;}
     .pillar{background:var(--white);padding:24px 20px;}
     .pillar-letter{font-size:30px;font-weight:700;color:var(--blue-core);font-family:'Times New Roman',serif;line-height:1;}
@@ -110,9 +110,9 @@
     .about-img{width:100%;display:block;}
     .about-glyph{width:40px;height:40px;object-fit:contain;margin-bottom:16px;}
     .about-infographic{width:100%;margin-top:0;}
-    /* Lightbulb strip — dark background, icon centred and slightly zoomed */
-    .about-lightbulb-wrap{background:var(--near-black);width:100%;height:180px;overflow:hidden;margin-top:0;display:flex;align-items:center;justify-content:center;}
-    .about-lightbulb-img{height:100%;width:100%;object-fit:contain;object-position:center;}
+    /* Lightbulb — same width as infographic, natural height, no background */
+    .about-lightbulb-wrap{width:100%;margin-top:16px;}
+    .about-lightbulb-img{width:100%;height:auto;display:block;mix-blend-mode:multiply;}
     .body-text{font-size:16px;color:var(--dark-grey);line-height:1.75;margin-top:16px;}
 
     /* ── SERVICES ── */
@@ -447,8 +447,8 @@ function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
 (function(){
   const logo = document.getElementById('navLogo');
   logo.innerHTML = `
-    ${C.hero.logo_nav_glyph ? `<img src="${C.hero.logo_nav_glyph}" alt="RAFT" style="height:28px;width:auto;flex-shrink:0;" onerror="this.style.display='none';">` : ''}
-    <span class="nav-wordmark">RAFT<span class="nav-wordmark-consulting">Consulting</span></span>`;
+    <img src="${C.hero.logo_white}" alt="RAFT" style="height:30px;width:auto;flex-shrink:0;filter:invert(1);" onerror="this.style.display='none';">
+    <span class="nav-wordmark" style="font-size:22px;">RAFT</span>`;
 
   const links = document.getElementById('navLinks');
   [['About','#about'],['Services','#services'],['Solutions','#datasheets'],
@@ -467,8 +467,15 @@ function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
   const h = C.hero, co = C.company;
   document.getElementById('heroInner').innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;">
-      <div class="${rev()}">
-        ${h.logo_hero ? `<img src="${h.logo_hero}" alt="${co.name}" style="width:100%;max-width:380px;display:block;filter:brightness(0) invert(1);opacity:.92;" onerror="this.style.display='none';">` : ''}
+      <div class="${rev()}" style="display:flex;flex-direction:column;align-items:flex-start;">
+        <img src="${h.logo_white}" alt="${co.name}"
+             style="width:100%;max-width:340px;display:block;"
+             onerror="this.style.display='none';">
+        <div style="margin-top:28px;font-family:'Times New Roman',Times,serif;font-weight:700;
+                    color:var(--white);letter-spacing:.04em;line-height:1.1;
+                    font-size:clamp(36px,5vw,68px);white-space:nowrap;">
+          RAFT <span style="opacity:.85;">Consulting</span>
+        </div>
       </div>
       <div>
         <p class="hero-eyebrow ${rev()}">${h.eyebrow}</p>
@@ -477,6 +484,12 @@ function rev(extra) { return 'reveal' + (extra ? ' ' + extra : ''); }
         <div class="hero-actions ${rev()} d3">
           <a href="${h.cta1_link}" class="btn btn-primary">${h.cta1_text}</a>
           <a href="${h.cta2_link}" class="btn btn-outline-white">${h.cta2_text}</a>
+        </div>
+        <div class="${rev()} d4" style="margin-top:32px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1);">
+          <p style="font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:12px;">What We Do</p>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;">
+            ${C.services.map(s=>`<span style="font-size:11px;font-weight:500;color:var(--blue-soft);border:1px solid rgba(74,144,196,.35);padding:6px 14px;letter-spacing:.02em;">${s.eyebrow}</span>`).join('')}
+          </div>
         </div>
       </div>
     </div>`;

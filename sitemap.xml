@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://www.raftdxb.com/</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Blog PDFs -->
+  <url>
+    <loc>https://www.raftdxb.com/blog-1-scor-agent-metrics.pdf</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.raftdxb.com/blog-2-solution-design-mix.pdf</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.raftdxb.com/blog-3-engagement-model.pdf</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.raftdxb.com/blog-4-raft-framework.pdf</loc>
+    <lastmod>2026-05-20</lastmod>
+    <changefreq>never</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
